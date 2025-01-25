@@ -28,7 +28,7 @@ const menuItems = [
       {
         label: 'PlayGround',
         icon: LayoutGrid,
-        href: '/playground'
+        href: '/'
       }
     ]
   },
@@ -54,27 +54,7 @@ const menuItems = [
         label: 'Llama',
         icon: Infinity,
         href: '/model/llama'
-      },
-      {
-        label: 'ChatGPT-4o',
-        icon: Bot,
-        href: '/model/chatgpt-4o'
-      },
-      {
-        label: 'Gemini 1.5 Pro',
-        icon: Sparkles,
-        href: '/model/gemini'
-      },
-      {
-        label: 'Claude 3.5',
-        icon: Brain,
-        href: '/model/claude'
-      },
-      {
-        label: 'Llama',
-        icon: Infinity,
-        href: '/model/llama'
-      },
+      }
     ]
   }
 ];
@@ -97,7 +77,7 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
       )}
     >
       <div className="px-3 py-2">
-        <Link to="/playground" className='flex items-center space-x-1 text-black hover:text-black/80'>
+        <Link to="/" className='flex items-center space-x-1 text-black hover:text-black/80'>
           <img className='size-8' src="/logo.png" alt="logo" />
           {!isCollapsed && <span className='text-lg font-bold'>Playground.ai</span>}
 
@@ -116,7 +96,6 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
 
 
               {section.title === "AI Models" ? (
-
                 <div className="space-y-1">
                   {section.items.map((item, itemIdx) => {
                     const Icon = item.icon;
@@ -143,7 +122,7 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
                   <button
                     className="w-full py-2 mt-2 bg-transparent"
                   >
-                    <div className="flex items-center rounded-lg bg-black text-white px-2 py-2">
+                    <div className="flex items-center rounded-lg bg-black text-white px-2 py-2 text-sm font-medium">
                       <Plus className="h-5 w-5" />
                       {!isCollapsed && (
                         <span className="ml-2">Add More Modules</span>
@@ -185,7 +164,7 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
         {!isCollapsed && (
           <div className="px-3 py-2 mt-2">
             <div className="flex items-center rounded-lg bg-accent/50 px-2 py-2 border border-black/90">
-              <div className="flex items-center space-x-2">
+              <div className="flex items-center space-x-2 text-sm font-medium">
 
                 <>
                   <span>Monthly Usage:</span>
@@ -205,7 +184,7 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
             return (
               <button
                 key={idx}
-                className="flex w-full items-center rounded-lg px-2 py-2 hover:bg-accent hover:text-accent-foreground"
+                className="flex w-full items-center rounded-lg px-2 py-2 hover:bg-accent hover:text-accent-foreground text-sm font-medium"
               >
                 <Icon className="h-5 w-5" />
                 {!isCollapsed && <span className="ml-2">{item.label}</span>}

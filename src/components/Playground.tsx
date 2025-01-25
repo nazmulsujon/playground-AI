@@ -1,24 +1,10 @@
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import ChatPanel from './ChatPanel';
+import { getPanelLayout } from '@/lib/getPanelLayout';
 
 const Playground = () => {
-  const [panelCount, setPanelCount] = useState(4);
-  
-  const getPanelLayout = () => {
-    switch (panelCount) {
-      case 2:
-        return 'grid-cols-2';
-      case 3:
-        return 'grid-cols-3';
-      case 4:
-        return 'grid-cols-2';
-      case 6:
-        return 'grid-cols-3';
-      default:
-        return 'grid-cols-2';
-    }
-  };
+  const [panelCount, setPanelCount] = useState(2);
 
   return (
     <div className="h-screen flex flex-col p-4">
@@ -52,7 +38,7 @@ const Playground = () => {
         <Button>Prompts</Button>
       </div>
 
-      <div className={`grid ${getPanelLayout()} gap-4 flex-1`}>
+      <div className={`grid ${getPanelLayout(panelCount)} gap-4 flex-1`}>
         {Array.from({ length: panelCount }).map((_, idx) => (
           <ChatPanel
             key={idx}

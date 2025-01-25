@@ -11,7 +11,6 @@ const Routing: React.FC<RoutingProps> = ({ setShowChatHistory }) => {
     return (
         <Routes>
             <Route path="/" element={<Playground />} />
-            <Route path="/playground" element={<Playground />} />
             <Route
                 path="/model/:modelId"
                 element={
