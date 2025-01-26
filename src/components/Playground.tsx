@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import ChatPanel from './ChatPanel';
 import { getPanelLayout } from '@/lib/getPanelLayout';
+import ChatInput from './ChatInput';
 
 const Playground = () => {
   const [panelCount, setPanelCount] = useState(2);
@@ -38,7 +39,7 @@ const Playground = () => {
         <Button>Prompts</Button>
       </div>
 
-      <div className={`grid ${getPanelLayout(panelCount)} gap-4 flex-1`}>
+      <div className={`lg:grid ${getPanelLayout(panelCount)} gap-4 flex-1`}>
         {Array.from({ length: panelCount }).map((_, idx) => (
           <ChatPanel
             key={idx}
@@ -46,6 +47,12 @@ const Playground = () => {
           />
         ))}
       </div>
+
+      <ChatInput
+        onSend={(message) => console.log("Message:", message)}
+        onImageUpload={(file) => console.log("Image:", file)}
+        onFileUpload={(file) => console.log("File:", file)}
+      />
     </div>
   );
 }
