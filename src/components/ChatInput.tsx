@@ -99,9 +99,6 @@ export default function ChatInput({ onSend, onImageUpload, onFileUpload }: ChatI
                     }}
                 />
             </div>
-            <Button variant="default" className="bg-black hover:bg-black/90 text-white rounded-lg px-6">
-                Prompts
-            </Button>
         </div>
     )
 }

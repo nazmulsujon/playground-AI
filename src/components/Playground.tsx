@@ -9,7 +9,22 @@ const Playground = () => {
 
   return (
     <div className="h-screen flex flex-col p-4">
-      <div className="flex items-center justify-between mb-4">
+
+      <div className={`lg:grid ${getPanelLayout(panelCount)} gap-4 flex-1`}>
+        {Array.from({ length: panelCount }).map((_, idx) => (
+          <ChatPanel
+            key={idx}
+            title={`Chat ${idx + 1}`}
+          />
+        ))}
+      </div>
+
+      <div className="flex items-center justify-between mt-4 space-x-4">
+        <ChatInput
+          onSend={(message) => console.log("Message:", message)}
+          onImageUpload={(file) => console.log("Image:", file)}
+          onFileUpload={(file) => console.log("File:", file)}
+        />
         <div className="flex space-x-2">
           <Button
             variant={panelCount === 2 ? "default" : "outline"}
@@ -36,23 +51,8 @@ const Playground = () => {
             6 Panels
           </Button>
         </div>
-        <Button>Prompts</Button>
       </div>
 
-      <div className={`lg:grid ${getPanelLayout(panelCount)} gap-4 flex-1`}>
-        {Array.from({ length: panelCount }).map((_, idx) => (
-          <ChatPanel
-            key={idx}
-            title={`Chat ${idx + 1}`}
-          />
-        ))}
-      </div>
-
-      <ChatInput
-        onSend={(message) => console.log("Message:", message)}
-        onImageUpload={(file) => console.log("Image:", file)}
-        onFileUpload={(file) => console.log("File:", file)}
-      />
     </div>
   );
 }
