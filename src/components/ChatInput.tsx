@@ -1,9 +1,10 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
+import { Textarea } from "@/components/ui/textarea"
 import { Input } from "@/components/ui/input"
-import { Camera, FileUp, SendHorizontal } from "lucide-react"
-import { type ChangeEvent, useState } from "react"
+import { ImagePlus, Paperclip, SendHorizontal } from "lucide-react"
+import { type ChangeEvent, useState, useRef } from "react"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
 interface ChatInputProps {
@@ -14,6 +15,7 @@ interface ChatInputProps {
 
 export default function ChatInput({ onSend, onImageUpload, onFileUpload }: ChatInputProps) {
     const [message, setMessage] = useState("")
+    const textareaRef = useRef<HTMLTextAreaElement>(null)
 
     const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0]
@@ -33,19 +35,30 @@ export default function ChatInput({ onSend, onImageUpload, onFileUpload }: ChatI
         if (message.trim() && onSend) {
             onSend(message)
             setMessage("")
+
+            if (textareaRef.current) {
+                textareaRef.current.style.height = "48px"
+            }
+        }
+    }
+
+    const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setMessage(e.target.value)
+        if (textareaRef.current) {
+            textareaRef.current.style.height = "48px"
+            textareaRef.current.style.height = `${Math.min(textareaRef.current.scrollHeight, 300)}px`
         }
     }
 
     return (
         <div className="flex items-center gap-2 w-full">
             <div className="flex-1 relative">
-                <div className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
-
+                <div className="absolute left-4 top-1/2 -translate-y-1/2 flex items-center gap-2 space-x-0.5">
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
                                 <label htmlFor="image-upload" className="cursor-pointer">
-                                    <Camera className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                                    <ImagePlus className="size-5 text-gray-400 hover:text-gray-600" />
                                 </label>
                             </TooltipTrigger>
                             <TooltipContent className="w-fit text-sm text-gray-600 bg-background">
@@ -53,13 +66,19 @@ export default function ChatInput({ onSend, onImageUpload, onFileUpload }: ChatI
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
-                    <input id="image-upload" type="file" accept="image/*" className="hidden" onChange={handleImageUpload} />
+                    <Input
+                        id="image-upload"
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={handleImageUpload}
+                    />
 
                     <TooltipProvider>
                         <Tooltip>
                             <TooltipTrigger>
                                 <label htmlFor="file-upload" className="cursor-pointer">
-                                    <FileUp className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                                    <Paperclip className="size-5 text-gray-400 hover:text-gray-600" />
                                 </label>
                             </TooltipTrigger>
                             <TooltipContent className="w-80 lg:w-fit text-sm text-gray-600 bg-background">
@@ -69,7 +88,7 @@ export default function ChatInput({ onSend, onImageUpload, onFileUpload }: ChatI
                             </TooltipContent>
                         </Tooltip>
                     </TooltipProvider>
-                    <input
+                    <Input
                         id="file-upload"
                         type="file"
                         accept=".pdf,.doc,.docx,.txt,.xlsx,.xls,.csv"
@@ -80,22 +99,26 @@ export default function ChatInput({ onSend, onImageUpload, onFileUpload }: ChatI
 
                 <Button
                     variant="ghost"
-                    className="absolute right-3 top-1/2 -translate-y-1/2 bg-transparent hover:bg-transparent p-0"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 bg-transparent hover:bg-transparent p-0"
                     onClick={handleSend}
                 >
-                    <SendHorizontal className="h-5 w-5 text-gray-400 hover:text-gray-600" />
+                    <SendHorizontal className="size-5 text-gray-400 hover:text-gray-600" />
                 </Button>
 
-                <Input
+                <Textarea
+                    ref={textareaRef}
                     value={message}
-                    onChange={(e) => setMessage(e.target.value)}
-                    placeholder="Write Here"
-                    className="pl-20 pr-11 py-6 border-gray-200 bg-white rounded-lg focus-visible:ring-gray-300"
+                    onChange={handleTextareaChange}
+                    placeholder="Use Shift+Enter to add new line"
+                    className="pl-20 pr-11 py-2 border border-gray-200 bg-white rounded-lg focus-visible:ring-gray-300 resize-none w-full h-[48px] min-h-[48px] max-h-[300px] overflow-y-auto leading-[1.78rem] placeholder:leading-[1.78rem]"
                     onKeyDown={(e) => {
                         if (e.key === "Enter" && !e.shiftKey) {
                             e.preventDefault()
                             handleSend()
                         }
+                    }}
+                    style={{
+                        scrollbarWidth: "thin",
                     }}
                 />
             </div>
