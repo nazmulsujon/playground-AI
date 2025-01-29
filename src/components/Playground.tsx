@@ -1,20 +1,28 @@
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
-import ChatPanel from './ChatPanel';
 import { getPanelLayout } from '@/lib/getPanelLayout';
 import ChatInput from './ChatInput';
+import { Columns2, Columns3, Grid2X2, Table } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import AIModelChat from './AIModelChat';
 
-const Playground = () => {
+interface PlaygroundProps {
+  className?: string;
+  modelId?: string;
+  onShowHistory?: () => void;
+}
+
+const Playground = ({ onShowHistory }: PlaygroundProps) => {
   const [panelCount, setPanelCount] = useState(2);
 
   return (
-    <div className="h-screen flex flex-col p-4">
-
+    <div className="h-screen flex flex-col p-4 overflow-y-auto">
       <div className={`lg:grid ${getPanelLayout(panelCount)} gap-4 flex-1`}>
         {Array.from({ length: panelCount }).map((_, idx) => (
-          <ChatPanel
+          <AIModelChat
+            onShowHistory={onShowHistory}
+            className={cn(panelCount === 4 || panelCount === 6 ? 'h-72' : 'h-[calc(100vh-6rem)]')}
             key={idx}
-            title={`Chat ${idx + 1}`}
           />
         ))}
       </div>
@@ -27,28 +35,34 @@ const Playground = () => {
         />
         <div className="flex space-x-2">
           <Button
-            variant={panelCount === 2 ? "default" : "outline"}
+            size="icon"
+            variant={panelCount === 2 ? "ghost" : "outline"}
             onClick={() => setPanelCount(2)}
           >
-            2 Panels
+            <Columns2 className={cn('size-5 text-gray-400', panelCount === 2 && "text-black")} />
           </Button>
           <Button
-            variant={panelCount === 3 ? "default" : "outline"}
+            size="icon"
+            variant={panelCount === 3 ? "ghost" : "outline"}
             onClick={() => setPanelCount(3)}
           >
-            3 Panels
+            <Columns3
+              className={cn('size-5 text-gray-400', panelCount === 3 && "text-black")}
+            />
           </Button>
           <Button
-            variant={panelCount === 4 ? "default" : "outline"}
+            size="icon"
+            variant={panelCount === 4 ? "ghost" : "outline"}
             onClick={() => setPanelCount(4)}
           >
-            4 Panels
+            <Grid2X2 className={cn('size-5 text-gray-400', panelCount === 4 && "text-black")} />
           </Button>
           <Button
-            variant={panelCount === 6 ? "default" : "outline"}
+            size="icon"
+            variant={panelCount === 6 ? "ghost" : "outline"}
             onClick={() => setPanelCount(6)}
           >
-            6 Panels
+            <Table className={cn('size-5 transform rotate-90 text-gray-400', panelCount === 6 && "text-black")} />
           </Button>
         </div>
       </div>

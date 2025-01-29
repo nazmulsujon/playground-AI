@@ -6,14 +6,16 @@ import { Input } from "@/components/ui/input"
 import { ImagePlus, Paperclip, SendHorizontal } from "lucide-react"
 import { type ChangeEvent, useState, useRef } from "react"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+import { cn } from "@/lib/utils"
 
 interface ChatInputProps {
     onSend?: (message: string) => void
     onImageUpload?: (file: File) => void
     onFileUpload?: (file: File) => void
+    className?: string
 }
 
-export default function ChatInput({ onSend, onImageUpload, onFileUpload }: ChatInputProps) {
+export default function ChatInput({ onSend, onImageUpload, onFileUpload, className }: ChatInputProps) {
     const [message, setMessage] = useState("")
     const textareaRef = useRef<HTMLTextAreaElement>(null)
 
@@ -110,7 +112,7 @@ export default function ChatInput({ onSend, onImageUpload, onFileUpload }: ChatI
                     value={message}
                     onChange={handleTextareaChange}
                     placeholder="Use Shift+Enter to add new line"
-                    className="pl-20 pr-11 py-2 border border-gray-200 bg-white rounded-lg focus-visible:ring-gray-300 resize-none w-full h-[48px] min-h-[48px] max-h-[300px] overflow-y-auto leading-[1.78rem] placeholder:leading-[1.78rem]"
+                    className={cn("pl-20 pr-11 py-2 border border-gray-200 bg-white rounded-md focus-visible:ring-gray-300 resize-none w-full h-[48px] min-h-[48px] max-h-[300px] overflow-y-auto leading-[1.78rem] placeholder:leading-[1.78rem]", className)}
                     onKeyDown={(e) => {
                         if (e.key === "Enter" && !e.shiftKey) {
                             e.preventDefault()

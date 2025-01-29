@@ -10,11 +10,11 @@ type RoutingProps = {
 const Routing: React.FC<RoutingProps> = ({ setShowChatHistory }) => {
     return (
         <Routes>
-            <Route path="/" element={<Playground />} />
+            <Route path="/" element={<Playground onShowHistory={() => setShowChatHistory(true)} />} />
             <Route
                 path="/model/:modelId"
                 element={
-                    <AIModelChat onShowHistory={() => setShowChatHistory(true)} />
+                    <AIModelChat className='m-4 h-[calc(100vh-2rem)]' onShowHistory={() => setShowChatHistory(true)} />
                 }
             />
         </Routes>
