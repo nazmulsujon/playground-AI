@@ -1,73 +1,18 @@
 import { cn } from '@/lib/utils';
-import {
-  LayoutGrid,
-  Bot,
-  Sparkles,
-  Brain,
-  Infinity,
-  Plus,
-  HeadphonesIcon,
-  Users,
-  Share2,
-  Settings,
-  ChevronLeft,
-  ChevronRight,
-} from 'lucide-react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ScrollArea } from './ui/scroll-area';
+import { sidebarBottomItems, sidebarMenuItems } from '@/lib/data';
+import { ChevronLeft, ChevronRight, Plus } from 'lucide-react';
 
 interface SidebarProps {
   isCollapsed: boolean;
   onToggle: () => void;
 }
 
-const menuItems = [
-  {
-    title: 'Primary',
-    items: [
-      {
-        label: 'PlayGround',
-        icon: LayoutGrid,
-        href: '/'
-      }
-    ]
-  },
-  {
-    title: 'AI Models',
-    items: [
-      {
-        label: 'ChatGPT-4o',
-        icon: Bot,
-        href: '/model/chatgpt-4o'
-      },
-      {
-        label: 'Gemini 1.5 Pro',
-        icon: Sparkles,
-        href: '/model/gemini'
-      },
-      {
-        label: 'Claude 3.5',
-        icon: Brain,
-        href: '/model/claude'
-      },
-      {
-        label: 'Llama',
-        icon: Infinity,
-        href: '/model/llama'
-      }
-    ]
-  }
-];
-
-const bottomItems = [
-  { label: 'Support', icon: HeadphonesIcon },
-  { label: 'Referrals', icon: Users },
-  { label: 'Affiliate Program', icon: Share2 },
-  { label: 'Settings', icon: Settings }
-];
-
 const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
   const location = useLocation();
+  const navigate = useNavigate();
+
 
   return (
     <div
@@ -86,7 +31,7 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
 
       <div className="flex-1 h-[60%]">
         <ScrollArea className="h-5/6 w-full">
-          {menuItems.map((section, idx) => (
+          {sidebarMenuItems.map((section, idx) => (
             <div key={idx} className="px-3 py-2">
               {!isCollapsed && (
                 <h3 className="mb-2 px-2 text-sm font-bold text-black hover:text-black/80">
@@ -121,6 +66,7 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
 
                   <button
                     className="w-full py-2 mt-2 bg-transparent"
+                    onClick={() => navigate("/settings")}
                   >
                     <div className="flex items-center rounded-lg bg-black text-white px-2 py-2 text-sm font-medium">
                       <Plus className="h-5 w-5" />
@@ -178,17 +124,18 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
       </div>
 
       <div className="border-t p-3 h-[30%]">
-        <div className="space-y-1">
-          {bottomItems.map((item, idx) => {
+        <div className="space-y-1.5">
+          {sidebarBottomItems.map((item, idx) => {
             const Icon = item.icon;
             return (
-              <button
+              <Link
+                to={item.href}
                 key={idx}
-                className="flex w-full items-center rounded-lg px-2 py-2 hover:bg-accent hover:text-accent-foreground text-sm font-medium"
+                className="flex w-full items-center rounded-lg px-2 py-2 bg-gray-100 hover:bg-accent hover:text-accent-foreground text-black/80 text-sm font-medium"
               >
                 <Icon className="h-5 w-5" />
                 {!isCollapsed && <span className="ml-2">{item.label}</span>}
-              </button>
+              </Link>
             );
           })}
         </div>
@@ -199,9 +146,9 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
         className="absolute top-1/2 -right-3 flex h-6 w-6 items-center justify-center rounded-full border bg-background shadow-md"
       >
         {isCollapsed ? (
-          <ChevronRight className="h-4 w-4" />
+          <ChevronRight className="size-4" />
         ) : (
-          <ChevronLeft className="h-4 w-4" />
+          <ChevronLeft className="size-4" />
         )}
       </button>
     </div>

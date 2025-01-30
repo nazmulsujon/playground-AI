@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { getPanelLayout } from '@/lib/getPanelLayout';
-import ChatInput from './ChatInput';
+import ChatInput from '../components/ChatInput';
 import { Columns2, Columns3, Grid2X2, Table } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import AIModelChat from './AIModelChat';

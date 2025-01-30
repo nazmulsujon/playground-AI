@@ -161,6 +161,8 @@ const ChatPanel = ({ className, modelId, onShowHistory }: ChatPanelProps) => {
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim voluptatibus corporis delectus assumenda unde ex soluta provident expedita, ducimus ad distinctio, accusamus sunt tenetur ullam iste eos, facilis suscipit officiis laborum dolorem beatae adipisci laboriosam excepturi
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim voluptatibus corporis delectus assumenda unde ex soluta provident expedita, ducimus ad distinctio, accusamus sunt tenetur ullam iste eos, facilis suscipit officiis laborum dolorem beatae adipisci laboriosam excepturi
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim voluptatibus corporis delectus assumenda unde ex soluta provident expedita, ducimus ad distinctio, accusamus sunt tenetur ullam iste eos, facilis suscipit officiis laborum dolorem beatae adipisci laboriosam excepturi
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim voluptatibus corporis delectus assumenda unde ex soluta provident expedita, ducimus ad distinctio, accusamus sunt tenetur ullam iste eos, facilis suscipit officiis laborum dolorem beatae adipisci laboriosam excepturi
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim voluptatibus corporis delectus assumenda unde ex soluta provident expedita, ducimus ad distinctio, accusamus sunt tenetur ullam iste eos, facilis suscipit officiis laborum dolorem beatae adipisci laboriosam excepturi
       </ScrollArea>
 
       <div

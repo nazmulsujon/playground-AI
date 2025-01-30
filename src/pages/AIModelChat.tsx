@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import ChatPanel from './ChatPanel';
+import ChatPanel from '../components/ChatPanel';
 import { cn } from '@/lib/utils';
 
 interface AIModelChatProps {

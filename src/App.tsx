@@ -2,6 +2,8 @@ import { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import ChatHistory from './components/ChatHistory';
 import Routing from './routes/routing';
+import { Toaster } from 'react-hot-toast';
+
 
 function App() {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(false);
@@ -9,6 +11,7 @@ function App() {
 
   return (
     <div className="flex h-screen bg-background">
+      <Toaster/>
       <Sidebar
         isCollapsed={isSidebarCollapsed}
         onToggle={() => setIsSidebarCollapsed(!isSidebarCollapsed)}
