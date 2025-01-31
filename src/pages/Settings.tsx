@@ -11,7 +11,7 @@ export default function Settings() {
             <header className="flex h-12 shrink-0 items-center gap-2 border-b px-4 text-lg font-semibold">
                 Account Settings
             </header>
-            <div className="w-full h-[calc(100vh-4rem)] p-4 overflow-y-auto" >
+            <div className="w-full h-[calc(100vh-6rem)] md:h-[calc(100vh-4rem)] p-4 overflow-y-auto" >
                 <Tabs defaultValue="ai-models" className="w-full">
                     <TabsList className="grid w-full lg:w-[31.25rem] grid-cols-2">
                         <TabsTrigger value="ai-models">

@@ -16,24 +16,25 @@ const Playground = ({ onShowHistory }: PlaygroundProps) => {
   const [panelCount, setPanelCount] = useState(2);
 
   return (
-    <div className="h-screen flex flex-col p-4 overflow-y-auto">
+    <div className="h-screen flex flex-col p-4 pt-2 md:pt-4 overflow-y-auto">
       <div className={`lg:grid ${getPanelLayout(panelCount)} gap-4 flex-1`}>
         {Array.from({ length: panelCount }).map((_, idx) => (
           <AIModelChat
             onShowHistory={onShowHistory}
-            className={cn(panelCount === 4 || panelCount === 6 ? 'h-72' : 'h-[calc(100vh-6rem)]')}
+            className={cn("mb-6 md:mb-0", panelCount === 4 || panelCount === 6 ? 'h-72' : 'h-72 lg:h-[calc(100vh-6rem)]')}
             key={idx}
           />
         ))}
       </div>
 
-      <div className="flex items-center justify-between mt-4 space-x-4">
+
+      <div className="sticky bottom-8 md:bottom-0 bg-white z-10 mt-4 flex flex-col-reverse lg:flex-row items-center justify-between space-x-4">
         <ChatInput
           onSend={(message) => console.log("Message:", message)}
           onImageUpload={(file) => console.log("Image:", file)}
           onFileUpload={(file) => console.log("File:", file)}
         />
-        <div className="flex space-x-2">
+        <div className="flex space-x-2 mb-2 lg:mb-0">
           <Button
             size="icon"
             variant={panelCount === 2 ? "ghost" : "outline"}
@@ -66,7 +67,6 @@ const Playground = ({ onShowHistory }: PlaygroundProps) => {
           </Button>
         </div>
       </div>
-
     </div>
   );
 }

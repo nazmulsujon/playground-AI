@@ -132,7 +132,7 @@ const ChatPanel = ({ className, modelId, onShowHistory }: ChatPanelProps) => {
                   <EllipsisVertical className="size-4" />
                 </Button>
               </DropdownMenuTrigger>
-              <DropdownMenuContent>
+              <DropdownMenuContent align="end">
                 <DropdownMenuItem onClick={onShowHistory}>
                   <History className="size-4 text-gray-500 mr-2" /> Chat History
                 </DropdownMenuItem>
@@ -142,21 +142,41 @@ const ChatPanel = ({ className, modelId, onShowHistory }: ChatPanelProps) => {
               </DropdownMenuContent>
             </DropdownMenu>
           ) : (
-            <div className="flex items-center gap-2">
-              <Button size="sm" variant="outline" onClick={onShowHistory}>
-                <History className="size-4 text-gray-500 mr-2" /> Chat History
-              </Button>
-              <Button size="sm" variant="outline">
-                <Eraser className="size-4 text-gray-500 mr-2" /> Clear Chat
-              </Button>
-            </div>
+            <Fragment>
+              <div className="hidden md:flex items-center gap-2">
+                <Button size="sm" variant="outline" onClick={onShowHistory}>
+                  <History className="size-4 text-gray-500 mr-2" /> Chat History
+                </Button>
+                <Button size="sm" variant="outline">
+                  <Eraser className="size-4 text-gray-500 mr-2" /> Clear Chat
+                </Button>
+              </div>
+
+              <div className="md:hidden">
+                <DropdownMenu>
+                  <DropdownMenuTrigger asChild>
+                    <Button size="sm" variant="outline">
+                      <EllipsisVertical className="size-4" />
+                    </Button>
+                  </DropdownMenuTrigger>
+                  <DropdownMenuContent align="end">
+                    <DropdownMenuItem onClick={onShowHistory}>
+                      <History className="size-4 text-gray-500 mr-2" /> Chat History
+                    </DropdownMenuItem>
+                    <DropdownMenuItem >
+                      <Eraser className="size-4 text-gray-500 mr-2" /> Clear Chat
+                    </DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu>
+              </div>
+            </Fragment>
           )
         }
 
       </div>
 
       <ScrollArea
-        className={cn("p-4 flex-1", className)}>
+        className="p-4 flex-1">
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim voluptatibus corporis delectus assumenda unde ex soluta provident expedita, ducimus ad distinctio, accusamus sunt tenetur ullam iste eos, facilis suscipit officiis laborum dolorem beatae adipisci laboriosam excepturi
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim voluptatibus corporis delectus assumenda unde ex soluta provident expedita, ducimus ad distinctio, accusamus sunt tenetur ullam iste eos, facilis suscipit officiis laborum dolorem beatae adipisci laboriosam excepturi
         Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim voluptatibus corporis delectus assumenda unde ex soluta provident expedita, ducimus ad distinctio, accusamus sunt tenetur ullam iste eos, facilis suscipit officiis laborum dolorem beatae adipisci laboriosam excepturi

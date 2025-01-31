@@ -1,6 +1,6 @@
 import AIModelChat from '@/pages/AIModelChat';
 import Playground from '@/pages/Playground';
-import Referrals from '@/pages/referrals';
+import Referrals from '@/pages/Referrals';
 import Settings from '@/pages/Settings';
 import { Dispatch, SetStateAction } from 'react';
 import { Routes, Route } from 'react-router-dom';
@@ -16,7 +16,7 @@ const Routing: React.FC<RoutingProps> = ({ setShowChatHistory }) => {
             <Route
                 path="/model/:modelId"
                 element={
-                    <AIModelChat className='m-4 h-[calc(100vh-2rem)]' onShowHistory={() => setShowChatHistory(true)} />
+                    <AIModelChat className='m-4 mt-2 md:mt-4 h-[calc(100vh-4.5rem)] md:h-[calc(100vh-2rem)]' onShowHistory={() => setShowChatHistory(true)} />
                 }
             />
             <Route path="/settings" element={<Settings />} />

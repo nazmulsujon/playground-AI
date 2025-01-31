@@ -27,7 +27,7 @@ export default function Referrals() {
             <header className="flex h-12 shrink-0 items-center gap-2 border-b px-4 text-lg font-semibold">
                 Referral Center
             </header>
-            <div className="w-full p-4 h-[calc(100vh-4rem)] overflow-y-auto">
+            <div className="w-full p-4 h-[calc(100vh-6rem)] md:h-[calc(100vh-4rem)] overflow-y-auto">
                 <div className="max-w-2xl space-y-6">
                     <Card>
                         <CardHeader>

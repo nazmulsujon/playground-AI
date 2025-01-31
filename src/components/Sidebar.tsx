@@ -2,14 +2,17 @@ import { cn } from '@/lib/utils';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { ScrollArea } from './ui/scroll-area';
 import { sidebarBottomItems, sidebarMenuItems } from '@/lib/data';
-import { ChevronLeft, ChevronRight, Plus } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Plus, X } from 'lucide-react';
+import { Button } from './ui/button';
 
 interface SidebarProps {
   isCollapsed: boolean;
-  onToggle: () => void;
+  onToggle?: () => void;
+  handleToggleSheet?: () => void
+  className?: string
 }
 
-const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
+const Sidebar = ({ isCollapsed, onToggle, handleToggleSheet, className }: SidebarProps) => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -17,16 +20,22 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
   return (
     <div
       className={cn(
-        'hidden relative md:flex flex-col border-r bg-card transition-all duration-300',
-        isCollapsed ? 'w-[60px]' : 'w-[240px]'
+        'relative h-full max-h-screen flex flex-col border-r bg-card transition-all duration-300',
+        isCollapsed ? 'w-[60px]' : 'w-[240px]',
+        className
       )}
     >
-      <div className="px-3 py-2">
+      <div className={cn("px-3 py-2 items-center justify-between",
+        isCollapsed ? "flex flex-col-reverse" : "flex")}>
         <Link to="/" className='flex items-center space-x-1 text-black hover:text-black/80'>
           <img className='size-8' src="/logo.png" alt="logo" />
           {!isCollapsed && <span className='text-lg font-bold'>Playground.ai</span>}
 
         </Link>
+
+        <Button className={cn('rounded-lg size-7 md:hidden', isCollapsed && "mb-2.5")} size="icon" variant="outline" onClick={handleToggleSheet}>
+          <X className='size-5' />
+        </Button>
       </div>
 
       <div className="flex-1 h-[60%]">
@@ -47,6 +56,7 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
                     const isActive = location.pathname === item.href;
                     return (
                       <Link
+                        onClick={handleToggleSheet}
                         key={itemIdx}
                         to={item.href}
                         className={cn(
@@ -66,7 +76,10 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
 
                   <button
                     className="w-full py-2 mt-2 bg-transparent"
-                    onClick={() => navigate("/settings")}
+                    onClick={() => {
+                      navigate("/settings");
+                      handleToggleSheet;
+                    }}
                   >
                     <div className="flex items-center rounded-lg bg-black text-white px-2 py-2 text-sm font-medium">
                       <Plus className="h-5 w-5" />
@@ -84,6 +97,7 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
                     const isActive = location.pathname === item.href;
                     return (
                       <Link
+                        onClick={handleToggleSheet}
                         key={itemIdx}
                         to={item.href}
                         className={cn(
@@ -129,6 +143,7 @@ const Sidebar = ({ isCollapsed, onToggle }: SidebarProps) => {
             const Icon = item.icon;
             return (
               <Link
+                onClick={handleToggleSheet}
                 to={item.href}
                 key={idx}
                 className="flex w-full items-center rounded-lg px-2 py-2 bg-gray-100 hover:bg-accent hover:text-accent-foreground text-black/80 text-sm font-medium"
